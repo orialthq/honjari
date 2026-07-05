@@ -11,6 +11,7 @@ export default function App() {
   const { venues, locationStatus, loading, error } = useNearbyVenues()
   const { checkedInVenueId, busy, checkIn, checkOut } = usePresence()
   const [pendingVenue, setPendingVenue] = useState<NearbyVenue | null>(null)
+  const [checkInError, setCheckInError] = useState<string | null>(null)
 
   const checkedInVenue = checkedInVenueId
     ? (venues.find((v) => v.id === checkedInVenueId) ?? null)
@@ -18,8 +19,14 @@ export default function App() {
 
   async function handleConfirm() {
     if (!pendingVenue) return
-    await checkIn(pendingVenue.id)
-    setPendingVenue(null)
+    try {
+      await checkIn(pendingVenue.id)
+      setPendingVenue(null)
+      setCheckInError(null)
+    } catch (err) {
+      console.error('체크인 실패:', err)
+      setCheckInError('체크인에 실패했어요. 잠시 후 다시 시도해 주세요.')
+    }
   }
 
   return (
@@ -68,8 +75,12 @@ export default function App() {
         <CheckInModal
           venue={pendingVenue}
           busy={busy}
+          error={checkInError}
           onConfirm={handleConfirm}
-          onCancel={() => setPendingVenue(null)}
+          onCancel={() => {
+            setPendingVenue(null)
+            setCheckInError(null)
+          }}
         />
       )}
     </>

@@ -220,6 +220,12 @@ button:disabled {
   margin: 0;
 }
 
+.modal .error {
+  font-size: 13px;
+  color: var(--danger);
+  margin: 0;
+}
+
 .modal .actions {
   display: flex;
   gap: 8px;

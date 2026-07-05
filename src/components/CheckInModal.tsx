@@ -3,17 +3,19 @@ import type { NearbyVenue } from '../types'
 interface Props {
   venue: NearbyVenue
   busy: boolean
+  error: string | null
   onConfirm: () => void
   onCancel: () => void
 }
 
-export function CheckInModal({ venue, busy, onConfirm, onCancel }: Props) {
+export function CheckInModal({ venue, busy, error, onConfirm, onCancel }: Props) {
   return (
     <div className="modal-backdrop" onClick={onCancel}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <img src={venue.photoUrl} alt={venue.name} />
         <h2>{venue.name} 맞으세요?</h2>
         <p className="hint">체크인하면 실시간 인원에 포함돼요</p>
+        {error && <p className="error">{error}</p>}
         <div className="actions">
           <button className="btn-ghost" onClick={onCancel} disabled={busy}>
             아니에요
