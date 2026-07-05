@@ -14,11 +14,21 @@ export function CheckedInScreen({ venueId, venue, busy, onCheckOut }: Props) {
 
   return (
     <div className="checked-in">
-      {venue && <img className="photo" src={venue.photoUrl} alt={venue.name} />}
-      <div>
-        <h2 className="venue-name">{venue?.name ?? '체크인한 매장'}</h2>
-        {venue && <p className="address">{venue.address}</p>}
-      </div>
+      <span className="checked-in-chip">
+        <span className="live-dot" /> 체크인 중
+      </span>
+      {venue && (
+        <div className="hero">
+          <img src={venue.photoUrl} alt={venue.name} />
+          <div className="overlay">
+            <div>
+              <h2 className="venue-name">{venue.name}</h2>
+              <p className="address">{venue.address}</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {!venue && <h2 style={{ margin: 0 }}>체크인한 매장</h2>}
       {venue && venue.tags.length > 0 && (
         <div className="tags">
           {venue.tags.map((tag) => (
@@ -29,8 +39,11 @@ export function CheckedInScreen({ venueId, venue, busy, onCheckOut }: Props) {
         </div>
       )}
       <div className="live-count">
+        <div className="live-label">
+          <span className="live-dot" /> 실시간
+        </div>
         <div className="value">{countLabel(count)}</div>
-        <div className="label">지금 이 매장에 있는 사람</div>
+        <div className="caption">나를 포함해 지금 이 매장에 있는 사람</div>
       </div>
       <p className="auto-checkout-hint">
         앱을 끄거나 자리를 뜨면 자동으로 체크아웃돼요
