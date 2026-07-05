@@ -36,6 +36,8 @@ userStatus/{uid}        → { venueId, checkedInAt }
 
 수동 체크아웃: 두 노드 모두 remove.
 
+재연결 복구: `.info/connected` 구독 → 재접속 시 이번 세션의 체크인 의도(ref)가 남아 있으면 2·3단계를 다시 수행 (잠깐 끊긴 사이 onDisconnect가 발동해 지워진 presence 복구).
+
 ## 보안 규칙 (database.rules.json)
 
 ```json

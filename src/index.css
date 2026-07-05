@@ -107,6 +107,17 @@ img {
   margin-bottom: 14px;
 }
 
+.btn-retry {
+  display: block;
+  margin-top: 8px;
+  background: var(--surface-raised);
+  color: var(--amber);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 8px;
+}
+
 button {
   font-family: inherit;
   cursor: pointer;

@@ -21,7 +21,7 @@ function SkeletonCard() {
 }
 
 export default function App() {
-  const { venues, locationStatus, loading, error } = useNearbyVenues()
+  const { venues, locationStatus, loading, error, retry } = useNearbyVenues()
   const { checkedInVenueId, busy, checkIn, checkOut } = usePresence()
   const [detailVenue, setDetailVenue] = useState<NearbyVenue | null>(null)
   const [pendingVenue, setPendingVenue] = useState<NearbyVenue | null>(null)
@@ -70,10 +70,20 @@ export default function App() {
           {locationStatus === 'denied' && !error && (
             <div className="notice">
               위치 권한이 없어 거리를 표시할 수 없어요. 브라우저 설정에서 위치
-              접근을 허용하면 가까운 순으로 보여드려요.
+              접근을 허용한 뒤 다시 시도해 보세요.
+              <button className="btn-retry" onClick={retry}>
+                다시 시도
+              </button>
             </div>
           )}
-          {error && <div className="notice">{error}</div>}
+          {error && (
+            <div className="notice">
+              {error}
+              <button className="btn-retry" onClick={retry}>
+                다시 시도
+              </button>
+            </div>
+          )}
           {loading ? (
             <div className="venue-list">
               <SkeletonCard />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { get, ref } from 'firebase/database'
 import { getDb, isMockMode } from '../firebase'
 import { MOCK_VENUES } from '../lib/mockDb'
@@ -12,6 +12,7 @@ interface NearbyVenuesState {
   locationStatus: LocationStatus
   loading: boolean
   error: string | null
+  retry: () => void
 }
 
 async function fetchVenues(): Promise<Venue[]> {
@@ -42,7 +43,12 @@ function getPosition(): Promise<GeolocationPosition> {
 
 /** 위치 권한 요청 → venues 전체 fetch → Haversine 거리 계산 후 가까운 순 정렬. */
 export function useNearbyVenues(): NearbyVenuesState {
-  const [state, setState] = useState<NearbyVenuesState>({
+  const [attempt, setAttempt] = useState(0)
+  const retry = useCallback(() => {
+    setState((s) => ({ ...s, loading: true, locationStatus: 'loading' }))
+    setAttempt((n) => n + 1)
+  }, [])
+  const [state, setState] = useState<Omit<NearbyVenuesState, 'retry'>>({
     venues: [],
     locationStatus: 'loading',
     loading: true,
@@ -96,7 +102,7 @@ export function useNearbyVenues(): NearbyVenuesState {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [attempt])
 
-  return state
+  return { ...state, retry }
 }
