@@ -1,0 +1,28 @@
+# Dependencies / build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Env — 실제 Firebase 설정값은 커밋하지 않음 (.env.example만 커밋)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.sw?
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temp
+*.tmp
+*.bak

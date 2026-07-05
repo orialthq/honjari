@@ -1,0 +1,29 @@
+{
+  "hongdae-dansang": {
+    "name": "단상 (혼술바)",
+    "lat": 37.5533,
+    "lng": 126.9222,
+    "address": "서울 마포구 와우산로 21길 19-6",
+    "photoUrl": "https://picsum.photos/seed/honjari-dansang/640/400",
+    "tags": ["하이볼", "바 테이블", "조용한"],
+    "createdAt": 1751500000000
+  },
+  "euljiro-nokturn": {
+    "name": "녹턴",
+    "lat": 37.5663,
+    "lng": 126.991,
+    "address": "서울 중구 을지로 12길 24 2층",
+    "photoUrl": "https://picsum.photos/seed/honjari-nokturn/640/400",
+    "tags": ["위스키", "LP", "혼술 환영"],
+    "createdAt": 1751500000000
+  },
+  "mangwon-jari": {
+    "name": "자리주점",
+    "lat": 37.5556,
+    "lng": 126.9019,
+    "address": "서울 마포구 망원로 57 1층",
+    "photoUrl": "https://picsum.photos/seed/honjari-jari/640/400",
+    "tags": ["막걸리", "안주 맛집", "카운터석"],
+    "createdAt": 1751500000000
+  }
+}
